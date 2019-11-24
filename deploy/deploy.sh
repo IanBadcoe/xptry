@@ -2,6 +2,7 @@
 
 SITE="xptry.com"
 EEVERSION="5.3.0"
+PHPVERSION="7.2"
 
 apt update
 apt upgrade -y
@@ -23,7 +24,7 @@ chown $USER:$USER ~/www
 ln -sfn ~/www /var/www/${SITE}
 
 apt install php -y
-apt install php-fpm -y
+sudo apt install php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath -y
 a2enmod proxy-fcgi setenvif
 a2enconf php7.2-fpm
 
