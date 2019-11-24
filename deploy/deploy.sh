@@ -15,7 +15,21 @@ apt install apache2 -y
 
 apt install unzip
 
-mkdir -p ../www
-unzip -qu installs/ExpressionEngine${EEVERSION}.zip -d ../www
-find ../www \( -type d -exec chmod 755 {} \; \) -o \( -type f -exec chmod 644 {} \; \)
-chown $USER:$USER ../www
+mkdir -p ~/www
+unzip -qu installs/ExpressionEngine${EEVERSION}.zip -d ~/www
+find ~/www \( -type d -exec chmod 755 {} \; \) -o \( -type f -exec chmod 644 {} \; \)
+chown $USER:$USER ~/www
+
+ln -sfn ~/www /var/www/${SITE}
+
+apt install php -y
+apt install php-fpm -y
+a2enmod proxy-fcgi setenvif
+a2enconf php7.2-fpm
+
+apt install ruby
+erb site="${SITE}" -T - files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
+a2ensite ${SITE}.conf
+a2dissite 000-default.conf
+systemctl restart apache2
+systemctl restart mysql.service
