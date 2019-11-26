@@ -6,7 +6,7 @@ PHPVERSION="7.2"
 
 apt update
 apt upgrade -y
-apt install mysql-server -y
+apt install mariadb-server -y
 
 mysql -e "CREATE USER IF NOT EXISTS ee@localhost IDENTIFIED BY 'eepwd'"
 mysql -e "CREATE DATABASE IF NOT EXISTS EE"
@@ -26,9 +26,9 @@ ln -sfn ~/www /var/www/${SITE}
 apt install php -y
 sudo apt install php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath -y
 a2enmod proxy-fcgi setenvif
-a2enconf php7.2-fpm
+a2enconf php7.2-fpm libapache2-mod-php php-mysql
 
-apt install ruby
+apt install ruby -y
 erb site="${SITE}" -T - files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
 a2ensite ${SITE}.conf
 a2dissite 000-default.conf
