@@ -14,7 +14,7 @@ mysql -e "GRANT ALL PRIVILEGES ON EE.* TO 'ee'@'localhost'"
 
 apt install apache2 -y
 
-apt install php libapache2-mod-php php-mysql php-curl php-zip -y
+apt install php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd -y
 
 apt install unzip
 
