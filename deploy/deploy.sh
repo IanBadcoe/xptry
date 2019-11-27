@@ -20,8 +20,7 @@ apt install php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-g
 apt install unzip curl -y
 
 sudo apt install php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath -y
-#sudo apt install php${PHPVERSION}-fpm -y
-a2enmod proxy-fcgi
+a2enmod proxy_fcgi
 a2enmod setenvif
 
 apt install ruby -y
