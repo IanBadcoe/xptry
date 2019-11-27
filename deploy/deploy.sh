@@ -21,7 +21,8 @@ apt install unzip curl -y
 
 sudo apt install php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath -y
 #sudo apt install php${PHPVERSION}-fpm -y
-a2enmod proxy-fcgi setenvif
+a2enmod proxy-fcgi
+a2enmod setenvif
 
 apt install ruby -y
 erb site="${SITE}" phpversion="${PHPVERSION}" -T - files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
