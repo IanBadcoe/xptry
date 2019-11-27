@@ -9,7 +9,7 @@
    </Directory>
 
    <FilesMatch ".php$"> 
-      SetHandler "proxy:unix:/var/run/php/php7.3-fpm.sock|fcgi://localhost/"          
+      SetHandler "proxy:unix:/var/run/php/php<%= phpversion %>-fpm.sock|fcgi://localhost/"          
    </FilesMatch>
  
    ErrorLog ${APACHE_LOG_DIR}/error.log
