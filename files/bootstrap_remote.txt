@@ -1,11 +1,11 @@
 #!/bin/bash
 sudo apt install git -y
-if [ -d "xptry/path/to/dir" ] 
+if [ -d "xptry" ] 
 then
-  git clone https://github.com/IanBadcoe/xptry.git
-  cd xptry
-else
   cd xptry
   git pull
+else
+  git clone https://github.com/IanBadcoe/xptry.git
+  cd xptry
 fi
 sudo deploy/deploy.sh "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8"
