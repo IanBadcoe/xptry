@@ -35,10 +35,16 @@ rm -rf /var/www/${SITE}
 #unzip -o /var/www/html/wizard.zip -d /var/www/${SITE}
 #rm /var/www/html/wizard.zip
 
-mkdir -p ~/www
-unzip -qu installs/ExpressionEngine${EEVERSION}.zip -d ~/www
-find ~/www \( -type d -exec chmod 755 {} \; \) -o \( -type f -exec chmod 644 {} \; \)
-chown -R www-data:www-data ~/www
+if [[ " ${array[@]} " =~ " -clean " ]]
+  rm -rf ~/www
+fi
+
+if [ ! -d "~/www"]
+  mkdir -p ~/www
+  unzip -qu installs/ExpressionEngine${EEVERSION}.zip -d ~/www
+  find ~/www \( -type d -exec chmod 755 {} \; \) -o \( -type f -exec chmod 644 {} \; \)
+  chown -R www-data:www-data ~/www
+fi
 
 ln -sfn ~/www /var/www/${SITE}
 
