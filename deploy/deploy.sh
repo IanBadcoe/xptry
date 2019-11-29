@@ -4,23 +4,28 @@ SITE="xptry.com"
 EEVERSION="5.3.0"
 PHPVERSION="7.2"
 
+echo "-------------------- Packages --------------------"
 apt update
+apt install mariadb-server apache2 php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd unzip curl rub php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath python3-pip -y --update
 apt upgrade -y
 apt autoremove -y
-apt install mariadb-server apache2 php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd unzip curl rub php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath pip -y
-pip install awscli
+pip3 install awscli --upgrade
 
+echo "-------------------- db user --------------------"
 mysql -e "CREATE USER IF NOT EXISTS ee@localhost IDENTIFIED BY 'eepwd'"
 mysql -e "CREATE DATABASE IF NOT EXISTS EE"
 mysql -e "GRANT ALL PRIVILEGES ON EE.* TO 'ee'@'localhost'"
 
+echo "-------------------- apache config --------------------"
 a2enmod proxy_fcgi
 a2enmod setenvif
 
 erb site="${SITE}" phpversion="${PHPVERSION}" -T - files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
 a2ensite ${SITE}.conf
 
+echo "-------------------- Site setup --------------------"
 rm -rf /var/www/${SITE}
+
 
 # to install the EE compatibility wizard
 #mkdir ~/wizard
@@ -48,5 +53,7 @@ bash util/fix_www_permissions.sh
 ln -sfn ~/www /var/www/${SITE}
 
 a2dissite 000-default.conf
+
+echo "-------------------- Services --------------------"
 systemctl restart apache2
 systemctl restart mysql.service
