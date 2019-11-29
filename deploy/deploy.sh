@@ -40,7 +40,7 @@ then
   rm -rf ~/www
 fi
 
-if [ ! -d "~/www"]
+if [ ! -d "~/www" ]
 then
   mkdir -p ~/www
   unzip -qu installs/ExpressionEngine${EEVERSION}.zip -d ~/www
