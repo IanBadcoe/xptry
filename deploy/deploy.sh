@@ -37,21 +37,21 @@ rm -rf /var/www/${SITE}
 
 if [[ " $@ " =~ " -clean " ]]
 then
-  echo "Cleaning ~/www"
+  echo "-------------------- Cleaning ~/www --------------------"
   rm -rf ~/www
 fi
 
-if [ ! -d "~/www" ]
+if [ ! -d ~/www ]
 then
-  echo "Unzipping EE into ~/www"
+  echo "-------------------- Unzipping EE into ~/www --------------------"
   mkdir -p ~/www
   unzip -qu installs/ExpressionEngine${EEVERSION}.zip -d ~/www
-  find ~/www \( -type d -exec chmod 755 {} \; \) -o \( -type f -exec chmod 644 {} \; \)
-  chown -R www-data:www-data ~/www
 fi
 
 mkdir -p ~/www/upload/images/author
 mkdir -p ~/www/upload/images/article
+find ~/www \( -type d -exec chmod 755 {} \; \) -o \( -type f -exec chmod 644 {} \; \)
+chown -R www-data:www-data ~/www
 
 ln -sfn ~/www /var/www/${SITE}
 
