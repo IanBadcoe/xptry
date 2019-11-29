@@ -39,7 +39,7 @@ then
   rm -rf ~/www
 fi
 
-if [ ! -d ~/www ]
+if [ ! -e ~/www/index.php ]
 then
   echo "-------------------- Unzipping EE into ~/www --------------------"
   mkdir -p ~/www
