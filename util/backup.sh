@@ -13,7 +13,7 @@ else
 c="d"
 fi
 
-name=${c}_$(date +%s).tar.gz
+name=${c}_$(date +%d-%m-%Y).tar.gz
 
 mkdir -p ~/backup/
 rm -rf ~/backup/*
@@ -22,10 +22,10 @@ mkdir -p ~/backup_c/
 rm -rf ~/backup_c/*
 
 cp -r ~/www ~/backup/www
-mysqldump EE > ~/backup/db.sql
+mysqldump --all-databases > ~/backup/db.sql
 
-tar -cvf - ~/backup | gzip --best > ~/backup_c/${name}
+tar -cvf - -C ~/backup . | gzip --best > ~/backup_c/${name}
 
 rm -rf ~/backup/*
 
-s3cmd put @/backup_c/${name} s3:xptry-backups
+aws s3 cp ~/backup_c/${name} s3://xptry-backups
