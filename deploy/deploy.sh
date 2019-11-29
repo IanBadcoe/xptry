@@ -46,6 +46,9 @@ if [ ! -d "~/www"]
   chown -R www-data:www-data ~/www
 fi
 
+mkdir -p ~/www/upload/images/author
+mkdir -p ~/www/upload/images/article
+
 ln -sfn ~/www /var/www/${SITE}
 
 a2dissite 000-default.conf
