@@ -9,11 +9,14 @@ c="m"
 elif [ $(date +%u) == 1 ]
 then
 c="w"
-else
+elif [ $(date +%H) -lt 4 ]
+then
 c="d"
+else
+c="h"
 fi
 
-name=${c}_$(date +%d-%m-%Y).tar.gz
+name=${c}_$(date +%d-%m-%Y:%H).tar.gz
 
 mkdir -p ~/backup/
 rm -rf ~/backup/*

@@ -9,7 +9,7 @@ apt update
 apt install mariadb-server apache2 php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd unzip curl ruby php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath python3-pip -y
 apt upgrade -y
 apt autoremove -y
-pip3 install awscli --upgrade
+sudo -H pip3 install awscli --upgrade
 
 echo "-------------------- db user --------------------"
 mysql -e "CREATE USER IF NOT EXISTS ee@localhost IDENTIFIED BY 'eepwd'"
@@ -57,3 +57,5 @@ a2dissite 000-default.conf
 echo "-------------------- Services --------------------"
 systemctl restart apache2
 systemctl restart mysql.service
+
+crontab files/crontab.txt
