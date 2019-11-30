@@ -59,3 +59,4 @@ systemctl restart apache2
 systemctl restart mysql.service
 
 crontab files/crontab.txt
+systemctl restart cron

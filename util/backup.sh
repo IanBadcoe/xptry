@@ -1,6 +1,9 @@
 #!/bin/bash
 
-if [[ $(date +%d) == 1 && $(date +%m) == 1 ]]
+if [ $(date +%H) -gt 3 ]
+then
+c="h"
+elif [[ $(date +%d) == 1 && $(date +%m) == 1 ]]
 then
 c="y"
 elif [ $(date +%d) == 1 ]
@@ -9,14 +12,11 @@ c="m"
 elif [ $(date +%u) == 1 ]
 then
 c="w"
-elif [ $(date +%H) -lt 4 ]
-then
-c="d"
 else
-c="h"
+c="d"
 fi
 
-name=${c}_$(date +%d-%m-%Y:%H).tar.gz
+name=${c}_$(date +%d-%m-%Y:%H-%M-%S).tar.gz
 
 mkdir -p ~/backup/
 rm -rf ~/backup/*
