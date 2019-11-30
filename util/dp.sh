@@ -1,9 +1,9 @@
 #!/bin/bash
 
-pushd ~/www
-find . -exec stat --format='%n %A %U %G' {} \; | sort > ~/list_www.txt
+pushd $1
+find . -exec stat --format='%n %A %U %G' {} \; | sort > ~/p1.txt
 popd
-pushd ~/backup/www
-find . -exec stat --format='%n %A %U %G' {} \; | sort > ~/list_www_cp.txt
+pushd $2
+find . -exec stat --format='%n %A %U %G' {} \; | sort > ~/p2.txt
 popd
-diff ~/list_www.txt ~/list_www_cp.txt
+diff ~/p1.txt ~/p2.txt

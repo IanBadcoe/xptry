@@ -48,7 +48,7 @@ fi
 
 mkdir -p ~/www/upload/images/author
 mkdir -p ~/www/upload/images/article
-bash util/fix_www_permissions.sh
+bash util/fix_www_permissions.sh ~/www
 
 ln -sfn ~/www /var/www/${SITE}
 

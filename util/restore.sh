@@ -13,7 +13,7 @@ then
   systemctl stop apache2
   rm -rf ~/www
   mv ~/backup/www ~/www
-  bash util/fix_www_permissions.sh
+  bash util/fix_www_permissions.sh ~/www
   cat ~/backup/db.sql | mysql
   systemctl start apache2
 fi
