@@ -18,17 +18,17 @@ fi
 
 name=${c}_$(date +%d-%m-%Y:%H-%M-%S).tar.gz
 
-mkdir -p ~/backup/
-rm -rf ~/backup/*
+mkdir -p ~ubuntu/backup/
+rm -rf ~ubuntu/backup/*
 
-mkdir -p ~/backup_c/
-rm -rf ~/backup_c/*
+mkdir -p ~ubuntu/backup_c/
+rm -rf ~ubuntu/backup_c/*
 
-cp -r ~/www ~/backup/www
-mysqldump --all-databases > ~/backup/db.sql
+cp -r ~ubuntu/www ~ubuntu/backup/www
+mysqldump --all-databases > ~ubuntu/backup/db.sql
 
-tar -cvf - -C ~/backup . | gzip --best > ~/backup_c/${name}
+tar -cvf - -C ~ubuntu/backup . | gzip --best > ~ubuntu/backup_c/${name}
 
-rm -rf ~/backup/*
+rm -rf ~ubuntu/backup/*
 
-aws s3 cp ~/backup_c/${name} s3://xptry-backups
+/usr/local/bin/aws s3 cp ~ubuntu/backup_c/${name} s3://xptry-backups
