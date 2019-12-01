@@ -16,7 +16,7 @@ else
 c="d"
 fi
 
-name=${c}_$(date +%d-%m-%Y:%H-%M-%S).tar.gz
+name=${c}_$(date +%d-%m-%Y_%H:%M:%S).tar.gz
 
 mkdir -p ~ubuntu/backup/
 rm -rf ~ubuntu/backup/*
