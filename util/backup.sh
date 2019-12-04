@@ -32,3 +32,4 @@ tar -cvf - -C ~ubuntu/backup . | gzip --best > ~ubuntu/backup_c/${name}
 rm -rf ~ubuntu/backup/*
 
 /usr/local/bin/aws s3 cp ~ubuntu/backup_c/${name} s3://xptry-backups
+/usr/local/bin/aws s3 cp ~ubuntu/backup_c/${name} s3://xptry-backups/current.tar.gz
