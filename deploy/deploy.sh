@@ -6,7 +6,7 @@ PHPVERSION="7.2"
 
 echo "-------------------- Packages --------------------"
 apt update
-apt install mariadb-server apache2 php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd unzip curl ruby php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath python3-pip -y
+apt install mariadb-server apache2 php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd unzip curl ruby php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath python3-pip samba -y
 apt upgrade -y
 apt autoremove -y
 sudo -H pip3 install awscli --upgrade
@@ -50,6 +50,7 @@ mkdir -p ~/www/upload/images/author
 mkdir -p ~/www/upload/images/article
 mkdir -p ~/www/upload/images/category
 mkdir -p ~/www/upload/images/thread
+
 bash util/fix_www_permissions.sh ~/www
 
 ln -sfn ~/www /var/www/${SITE}
@@ -62,3 +63,22 @@ systemctl restart mysql.service
 
 crontab files/crontab.txt
 systemctl restart cron
+
+echo "-------------------- Samba --------------------"
+usermod -a -G sambashare ubuntu
+usermod -a -G sambashare www-data
+
+sed -ie '/\[ubuntu\]/,$d' /etc/samba/smb.conf
+
+cat >> /etc/samba/smb.conf << EOF
+[ubuntu]
+    path = /home/ubuntu
+    browseable = yes
+    read only = no
+    force create mode = 0660
+    force directory mode = 2770
+    valid users = ubuntu
+EOF
+
+systemctl restart smbd
+systemctl restart nmbd
