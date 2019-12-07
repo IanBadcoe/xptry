@@ -51,6 +51,13 @@ mkdir -p ~/www/upload/images/article
 mkdir -p ~/www/upload/images/category
 mkdir -p ~/www/upload/images/thread
 
+if [ ! -e ~/www/system/user/.git ]
+then
+  rm ~/www/system/user.bck
+  mv ~/www/system/user ~/www/system/user.bck
+  git clone https://github.com/IanBadcoe/xptry-www.git ~/www/system/user
+fi
+
 bash util/fix_www_permissions.sh ~/www
 
 ln -sfn ~/www /var/www/${SITE}
