@@ -3,10 +3,10 @@
 if [ $(date +%H) -gt 3 ]
 then
 c="h"
-elif [[ $(date +%d) == 1 && $(date +%m) == 1 ]]
+elif [[ $(date +%d) == 01 && $(date +%m) == 01 ]]
 then
 c="y"
-elif [ $(date +%d) == 1 ]
+elif [ $(date +%d) == 01 ]
 then
 c="m"
 elif [ $(date +%u) == 1 ]
