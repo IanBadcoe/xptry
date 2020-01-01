@@ -1,1 +1,1 @@
-11 */4 * * * /bin/bash ~ubuntu/xptry/util/backup.sh > ~ubuntu/backup.log 2>&1
+11 */8 * * * /bin/bash ~ubuntu/xptry/util/backup.sh > ~ubuntu/backup.log 2>&1
