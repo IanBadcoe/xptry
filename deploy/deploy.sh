@@ -50,6 +50,7 @@ mkdir -p ~/www/upload/images/author
 mkdir -p ~/www/upload/images/article
 mkdir -p ~/www/upload/images/category
 mkdir -p ~/www/upload/images/thread
+mkdir -p ~/www/upload/images/decor
 mkdir -p ~/www/upload/resources/infrastructure
 
 if [ ! -e ~/www/system/user/.git ]
