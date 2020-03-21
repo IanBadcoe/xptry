@@ -9,9 +9,25 @@
    </Directory>
 
    <FilesMatch ".php$"> 
-      SetHandler "proxy:unix:/var/run/php/php<%= phpversion %>-fpm.sock|fcgi://localhost/"          
+      SetHandler "proxy:unix:/var/run/php/php<%= phpversion %>-fpm.sock|fcgi://localhost/"
    </FilesMatch>
  
    ErrorLog ${APACHE_LOG_DIR}/error.log
    CustomLog ${APACHE_LOG_DIR}/access.log combined  
-</VirtualHost> 
+
+   CacheQuickHandler off
+   CacheLock on
+   CacheLockPath /tmp/mod_cache-lock
+   CacheLockMaxAge 5
+   CacheIgnoreHeaders Set-Cookie
+
+   <Location />
+      CacheEnable disk
+      CacheHeader on
+      CacheDefaultExpire 300
+      CacheMaxExpire 300
+      CacheIgnoreNoLastMod On
+      ExpiresActive on
+      ExpiresDefault A300
+   </Location>
+</VirtualHost>

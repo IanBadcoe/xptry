@@ -6,7 +6,7 @@ PHPVERSION="7.2"
 
 echo "-------------------- Packages --------------------"
 apt update
-apt install mariadb-server apache2 php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd unzip curl ruby php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath python3-pip samba -y
+apt install mariadb-server apache2 php libapache2-mod-php php-mysql php-curl php-zip php-mbstring php-gd unzip curl ruby php${PHPVERSION}-fpm php${PHPVERSION}-common php${PHPVERSION}-mysql php${PHPVERSION}-xml php${PHPVERSION}-xmlrpc php${PHPVERSION}-curl php${PHPVERSION}-gd php${PHPVERSION}-imagick php${PHPVERSION}-cli php${PHPVERSION}-dev php${PHPVERSION}-imap php${PHPVERSION}-mbstring php${PHPVERSION}-soap php${PHPVERSION}-zip php${PHPVERSION}-bcmath python3-pip samba apache2-utils -y
 apt upgrade -y
 apt autoremove -y
 sudo -H pip3 install awscli --upgrade
@@ -19,6 +19,10 @@ mysql -e "GRANT ALL PRIVILEGES ON EE.* TO 'ee'@'localhost'"
 echo "-------------------- apache config --------------------"
 a2enmod proxy_fcgi
 a2enmod setenvif
+a2enmod cache
+a2enmod cache_disk
+a2enmod expires
+a2enmod headers
 
 erb site="${SITE}" phpversion="${PHPVERSION}" -T - files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
 a2ensite ${SITE}.conf
