@@ -56,6 +56,7 @@ mkdir -p ~/www/upload/images/category
 mkdir -p ~/www/upload/images/thread
 mkdir -p ~/www/upload/images/decor
 mkdir -p ~/www/upload/resources/infrastructure
+mkdir -p ~/www/upload/misc/forum
 
 if [ ! -e ~/www/system/user/.git ]
 then
