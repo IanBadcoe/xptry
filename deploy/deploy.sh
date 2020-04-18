@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SITE="xptry.com"
+SITE="these-threads.uk"
 EEVERSION="5.3.0"
 PHPVERSION="7.2"
 
