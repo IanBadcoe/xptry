@@ -2,6 +2,10 @@
    ServerName <%= site %>
    DocumentRoot /var/www/<%= site %>
 
+   <If "%{HTTP_HOST} != 'www.these-threads.uk'">
+      Redirect "/" "http://www.these-threads.uk/"
+   </If>
+
    <Directory /var/www/<%= site %>>
       Options Indexes FollowSymLinks
       AllowOverride All
