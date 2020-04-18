@@ -1,0 +1,14 @@
+{
+  "Comment": "Switch master DNS entry to the public IP: <%= public_ip %> for <%= hostname %>",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "www.these-threads.uk",
+        "Type": "A",
+        "TTL": 300,
+        "ResourceRecords": [ { "Value": "<%= public_ip %>" } ]
+      }
+    }
+  ]
+}
