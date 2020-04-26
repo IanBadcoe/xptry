@@ -28,8 +28,14 @@ a2enmod cache_disk
 a2enmod expires
 a2enmod headers
 
+#erb site="${SITE}" phpversion="${PHPVERSION}" -T - files/${SITE}.conf.erb > /etc/apache2/sites-available/${SITE}.conf
+#a2ensite ${SITE}.conf
+
 erb site="${SITE}" phpversion="${PHPVERSION}" -T - files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
 a2ensite ${SITE}.conf
+certbot --apache --agree-tos -n --redirect -d www.${SITE}
+
+apachectl configtest
 
 echo "-------------------- Site setup --------------------"
 rm -rf /var/www/${SITE}
