@@ -1,2 +1,1 @@
 11 */8 * * * /bin/bash ~ubuntu/xptry/util/backup.sh > ~ubuntu/backup.log 2>&1
-45 00 * * 6 /bin/bash ~ubuntu/xptry/util/upgrade.sh > ~ubuntu/upgrade.log 2>&1

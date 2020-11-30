@@ -31,7 +31,7 @@ a2enmod headers
 #erb site="${SITE}" phpversion="${PHPVERSION}" -T - files/${SITE}.conf.erb > /etc/apache2/sites-available/${SITE}.conf
 #a2ensite ${SITE}.conf
 
-erb site="${SITE}" phpversion="${PHPVERSION}" -T - files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
+erb site="${SITE}" phpversion="${PHPVERSION}" -T - ~ubuntu/xptry/files/apache.conf.erb > /etc/apache2/sites-available/${SITE}.conf
 a2ensite ${SITE}.conf
 certbot --apache --agree-tos -n --redirect -d www.${SITE}
 
@@ -77,7 +77,7 @@ then
   mv ~/www/system/user.bck/cache ~/www/system/user/cache
 fi
 
-bash util/fix_www_permissions.sh ~/www
+bash ~ubuntu/xptry/util/fix_www_permissions.sh ~/www
 
 ln -sfn ~/www /var/www/${SITE}
 
@@ -87,7 +87,8 @@ echo "-------------------- Services --------------------"
 systemctl restart apache2
 systemctl restart mysql.service
 
-crontab files/crontab.txt
+crontab ~ubuntu/xptry/files/crontab.txt
+crontab -u ubuntu ~ubuntu/xptry/files/ubuntu-crontab.txt
 systemctl restart cron
 
 echo "-------------------- Samba --------------------"
