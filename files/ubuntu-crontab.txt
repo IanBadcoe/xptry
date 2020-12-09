@@ -1,0 +1,1 @@
+45 00 * * TUE,FRI,SUN sudo /bin/bash ~ubuntu/xptry/util/upgrade.sh > ~ubuntu/upgrade.log 2>&1
